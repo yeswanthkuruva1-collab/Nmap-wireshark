@@ -1,2 +1,12 @@
-# Nmap-wireshark
-IP addresses and open ports,   capture packets and analyze with Wireshark,7.Identifing  potential security risks from open ports.
+h1>Nmap and Wireshark </h1>
+I took some time to utilize a few different Nmap scans and see how exactly the data is being sent across a network and what it looks like in Wireshark. In this README file you'll find screenshots of what my syntax looked like for the Nmap scan, pictures of the results of the scan, and also screenshots of the Wireshark pcaps. You can download the pcap files yourself if you want to do a deeper analysis of the traffic. 
+Each of these scans will have the Nmap documentation of images 
+
+![nmap -A](https://github.com/user-attachments/assets/3b5811ec-f6d6-4c58-90d9-93489f663f0f)
+![nmap -sV](https://github.com/user-attachments/assets/2730e196-5de4-4d4c-b38b-e74eba669161)
+![nmap -sC](https://github.com/user-attachments/assets/50171fb9-7769-4c00-b5e4-cb378943d1b0)
+![nmap -A -T5](https://github.com/user-attachments/assets/0b13d7fb-c488-424b-b1dd-7e3804803aff)
+![nmap -sP](https://github.com/user-attachments/assets/30e78e29-8c97-49c4-983c-dcc2b6829e31)
+<h2>-sS</h2>
+SYN scan is the default and most popular scan option for good reasons. It can be performed quickly, scanning thousands of ports per second on a fast network not hampered by restrictive firewalls. It is also relatively unobtrusive and stealthy since it never completes TCP connections. SYN scan works against any compliant TCP stack rather than depending on idiosyncrasies of specific platforms as Nmap's FIN/NULL/Xmas, Maimon and idle scans do. It also allows clear, reliable differentiation between the open, closed, and filtered states
+When SYN scan is available, it is usually a better choice. Nmap has less control over the high level connect call than with raw packets, making it less efficient. The system call completes connections to open target ports rather than performing the half-open reset that SYN scan does. Not only does this take longer and require more packets to obtain the same information, but target machines are more likely to log the connection. A decent IDS will catch either, but most machines have no such alarm system. Many services on your average Unix system will add a note to syslog, and sometimes a cryptic error message, when Nmap connects and then closes the connection without sending data. Truly pathetic services crash when this happens, though that is uncommon. An administrator who sees a bunch of connection attempts in  logs from a single system should know that  been connect scanned.
